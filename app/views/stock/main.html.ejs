@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+    <head>
+        <meta charset="utf-8" />
+        <title>Stock Trading</title>
+        <meta name="description" content="Stock ticker client example" />
+        <!-- Include the default demo stylesheet -->
+        <script src="<%= cdn_path %>nowjs/now.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+        <script src="<%= cdn_path %>app/stock.js"></script>
+        <link href="<%= cdn_path %>assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<%= cdn_path %>assets/css/reset.css" rel="stylesheet">
+        <link href="<%= cdn_path %>assets/css/demo.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div id="wrapper">
+            <div id="innerWrapper">
+                <div id="logo"></div>
+                <header>
+                    	<h2>Real-Time&nbsp;Stock&nbsp;Portfolio&nbsp;using&nbsp;WebSockets</h2>
+
+                </header>
+                <div ng-controller="stockCtrl">
+                    <table id="portfolio" class="stockTable" cellSpacing="0" width="900px">
+                        <thead>
+                            <tr>
+                                <th class="company" width="200px">Company</th>
+                                <th class="ticker" width="50px">Ticker</th>
+                                <th class="price" width="120px">Price</th>
+                                <th class="change" width="120px">Change</th>
+                                <th class="shares" width="60px">Shares</th>
+                                <th class="buttons" width="300px">Trade Stocks</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr id="totals"></tr>
+                            <tr id="budget"></tr>
+                        </tfoot>
+                        <tbody>
+                            <tr id="holding_MMM" class="stock" ng-repeat="c in companies">
+                                <td class="company" name="company">{{c.name}}</td>
+                                <td class="ticker" name="ticker">{{c.ticker}}</td>
+                                <td class="price" name="price">{{c.price | number:2}}</td>
+                                <td ng-class="{downChange: c.change < 0 , upChange : c.change > 0}" name="change">{{c.change}}</td>
+                                <td class="shares" name="shares">{{c.shares}}</td>
+                                <td>
+                                    <div name="commands">
+                                        <button name="buy" ng-disabled="c.shares <= 0" class="btn btn-large btn-success" style="width:100px; margin-left:40px;" type="button" ng-click="buyStock($index)">Buy</button>
+                                        <button name="sell" class="btn btn-large btn-primary" style="width:100px;margin-left:30px;" type="button" ng-click="sellStock($index)">Sell</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
