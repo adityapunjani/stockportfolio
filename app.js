@@ -81,26 +81,25 @@ GLOBAL.everyone.now.sell = function(index, x) {
   everyone.now.updateChange();
 };
 
+var generateRandomnumber = function() {
+    var x;
+    var y;
+    var z;
+    x = Math.random();
+    y = Math.random();
+    if(x <= .25) {
+      z = y * -1;
+    } else if(x <= .5) {
+      z = y;
+    } else if(x <= .75) {
+      z = 2 * y;
+    } else {
+      z = -2 * y;
+    }
 
+    return Math.round(z * 100) / 100;
+  };
 var updateStock = function() {
-    var generateRandomnumber = function() {
-        var x;
-        var y;
-        var z;
-        x = Math.random();
-        y = Math.random();
-        if(x <= .25) {
-          z = y * -1;
-        } else if(x <= .5) {
-          z = y;
-        } else if(x <= .75) {
-          z = 2 * y;
-        } else {
-          z = -2 * y;
-        }
-
-        return Math.round(z * 100) / 100;
-      };
 
     setInterval(function() {
       for(var i = 0; i < GLOBAL.everyone.now.companies.length; i++) {
