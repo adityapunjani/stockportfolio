@@ -106,7 +106,10 @@ var updateStock = function() {
         var p = generateRandomnumber();
         GLOBAL.everyone.now.companies[i].change = p;
         GLOBAL.everyone.now.companies[i].price = GLOBAL.everyone.now.companies[i].price + parseFloat(GLOBAL.everyone.now.companies[i].change);
-        GLOBAL.everyone.now.companies[i].value = everyone.now.updateChange();
+        if(typeof(everyone.now.updateChange) ===
+        "function") {
+          GLOBAL.everyone.now.companies[i].value = everyone.now.updateChange();
+        };
       }
     }, 1000);
 
